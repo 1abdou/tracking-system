@@ -12,6 +12,7 @@ import { computeMetrics } from "@/lib/metrics";
 import { createClient } from "@/lib/supabase/client";
 import type { Phase, PhaseDetail, TaskStatus, TaskWithContext } from "@/types/roadmap";
 
+import { DayTimer } from "./DayTimer";
 import { GlobalMetrics } from "./GlobalMetrics";
 import { PhaseWorkspace } from "./PhaseWorkspace";
 import { Sidebar } from "./Sidebar";
@@ -148,13 +149,14 @@ export function Dashboard() {
 
   return (
     <div className="flex min-h-screen flex-col bg-slate-950 lg:flex-row">
+      <DayTimer />
       <Sidebar
         phases={phases}
         selectedPhaseId={activePhaseId}
         onSelectPhase={setSelectedPhaseId}
       />
 
-      <main className="flex-1 overflow-x-auto p-6 lg:p-8">
+      <main className="flex-1 overflow-x-auto p-6 pt-20 pr-32 lg:p-8 lg:pt-8 lg:pr-8">
         {error && (
           <div
             className="mb-6 rounded-lg border border-red-800/80 bg-red-950/50 px-4 py-3 text-sm text-red-200"
