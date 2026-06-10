@@ -43,7 +43,19 @@ export function Dashboard() {
       ]);
       setPhases(phaseRows);
       setAllTasks(taskRows);
-      if (phaseRows.length) {
+      
+      // Auto-select the current phase
+      if (phaseRows.length && taskRows.length) {
+        const metrics = computeMetrics(phaseRows, taskRows);
+        const currentPhaseObj = phaseRows.find(
+          (p) => p.title === metrics.currentPhase,
+        );
+        if (currentPhaseObj) {
+          setSelectedPhaseId((prev) => prev ?? currentPhaseObj.id);
+        } else if (phaseRows.length) {
+          setSelectedPhaseId((prev) => prev ?? phaseRows[0].id);
+        }
+      } else if (phaseRows.length) {
         setSelectedPhaseId((prev) => prev ?? phaseRows[0].id);
       }
     } catch (err) {
