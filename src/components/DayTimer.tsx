@@ -42,7 +42,7 @@ function calcDays(startedAt: number | null): number {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  const diff = Math.floor((today.getTime() - start.getTime()) / MS_PER_DAY);
+  const diff = Math.floor(((today.getTime() - start.getTime()) / MS_PER_DAY) / 7);
   return Math.max(diff + 1, 1);
 }
 
@@ -96,7 +96,7 @@ export function DayTimer() {
         {days}
       </p>
       <p className="mb-3 mt-1 text-xs font-medium uppercase tracking-wide text-slate-400">
-        {days === 1 ? "day" : "days"}
+        {"Current Week"}
       </p>
       <div className="flex gap-2">
         <button
